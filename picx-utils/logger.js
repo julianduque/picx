@@ -6,7 +6,14 @@ const uuid = require('uuid')
 const chalk = require('chalk')
 const morgan = require('morgan')
 const through = require('through2')
+const streamFile = require('stream-file-archive')
+const { pkg } = require('@picx/config')
 
+const rotator = streamFile({
+  path: `logs/${pkg.name}-${pkg.version}-%Y-%m-%d.log`,
+  symlink: 'logs/current.log',
+  compress: true
+})
 const log = getLogger(__dirname, __filename)
 const customMorgan = morgan(middleware)
 
@@ -32,7 +39,7 @@ const formatter = through((chunk, _, callback) => {
 
 bole.output({
   level: process.env.DEBUG ? 'debug' : 'info',
-  stream: formatter
+  stream: process.env.NODE_ENV === 'production' ? rotator : formatter
 })
 
 function getLogger (...names) {
