@@ -18,7 +18,7 @@ $ export MONGODB_URL="mongodb://...."
 Build docker image
 
 ``` sh
-$ docker build -t hackdo/picx-app .
+$ docker build -t username/picx .
 ```
 
 ## Run
@@ -40,7 +40,7 @@ $ npm start
 
 Run with docker
 ``` sh
-$ docker run -p 8000:8000 -e MONGODB_URL=$MONGODB_URL hackdo/picx-app
+$ docker run -p 8000:8000 -e MONGODB_URL=$MONGODB_URL username/picx-app
 ```
 
 ## The MIT License
