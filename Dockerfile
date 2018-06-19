@@ -7,7 +7,7 @@ RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/
 RUN chmod +x /usr/local/bin/dumb-init
 
 COPY . .
-RUN npm install
+RUN npm install --production
 
 EXPOSE 8000
 ENTRYPOINT ["/usr/local/bin/dumb-init", "--", "npm", "start"]
