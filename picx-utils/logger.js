@@ -9,11 +9,6 @@ const through = require('through2')
 const streamFile = require('stream-file-archive')
 const { pkg } = require('@picx/config')
 
-const rotator = streamFile({
-  path: `logs/${pkg.name}-${pkg.version}-%Y-%m-%d.log`,
-  symlink: 'logs/current.log',
-  compress: true
-})
 const log = getLogger(__dirname, __filename)
 const customMorgan = morgan(middleware)
 
@@ -23,6 +18,12 @@ const levels = {
   warn: chalk.yellow,
   debug: chalk.magenta
 }
+
+const rotator = streamFile({
+  path: `logs/${pkg.name}-${pkg.version}-%Y-%m-%d.log`,
+  symlink: 'logs/current.log',
+  compress: true
+})
 
 const formatter = through((chunk, _, callback) => {
   try {
