@@ -4,9 +4,7 @@ const http = require('http')
 const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
-const session = require('express-session')
 const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
 const { errorHandler, media, image, home } = require('@picx/api')
 const { getLogger, logHandler, terminate } = require('@picx/utils')
 
@@ -19,15 +17,6 @@ app.use(helmet())
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(cookieParser())
-app.use(session({
-  secret: 'this is not a drill',
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    secure: 'auto'
-  }
-}))
 app.use(logHandler)
 app.use('/image', image)
 app.use('/media', media)
