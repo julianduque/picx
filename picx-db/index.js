@@ -14,7 +14,7 @@ if (!config.db) {
   process.exit(1)
 }
 
-mongoose.connect(config.db)
+mongoose.connect(config.db, { useNewUrlParser: true })
 mongoose.connection.on('error', terminate(1, 'dbError'))
 mongoose.connection.once('open', () => {
   log.info('db connected')
